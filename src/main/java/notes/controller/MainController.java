@@ -58,10 +58,11 @@ public class MainController {
     }
 
     @GetMapping("/delete-note")
-    public String deleteNote(@RequestParam int id, HttpServletRequest request) {
+    public String deleteNote(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         noteService.delete(id);
         request.setAttribute("notes", noteService.findAll());
         request.setAttribute("mode", "MODE_NOTES");
+        response.sendRedirect("/all-notes");
         return "index";
     }
 
